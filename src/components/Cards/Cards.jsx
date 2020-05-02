@@ -16,17 +16,43 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           item
           component={Card}
           xs={12}
-          md={3}
-          className={cx(styles.card, styles.infected)}
+          md={2}
+          className={cx(styles.card, styles.total)}
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              Total Infected
             </Typography>
             <Typography variant="h5">
               <CountUp
                 start={0}
                 end={confirmed.value}
+                duration={1.5}
+                separator=","
+              />
+            </Typography>
+            <Typography color="textSecondary">
+              {new Date(lastUpdate).toDateString()}
+            </Typography>
+            <Typography variant="body2">Total cases of COVID 19</Typography>
+          </CardContent>
+        </Grid>
+
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={2}
+          className={cx(styles.card, styles.infected)}
+        >
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Active
+            </Typography>
+            <Typography variant="h5">
+              <CountUp
+                start={0}
+                end={confirmed.value - recovered.value - deaths.value}
                 duration={1.5}
                 separator=","
               />
@@ -44,7 +70,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           item
           component={Card}
           xs={12}
-          md={3}
+          md={2}
           className={cx(styles.card, styles.recovered)}
         >
           <CardContent>
@@ -72,7 +98,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           item
           component={Card}
           xs={12}
-          md={3}
+          md={2}
           className={cx(styles.card, styles.deaths)}
         >
           <CardContent>
